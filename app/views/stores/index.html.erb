@@ -1,0 +1,13 @@
+<h1>manage all the stores</h1>
+
+<h2>new store</h2>
+<%= render "form" %>
+
+<h1>all yer stores</h1>
+<% if @stores.any? %>
+  <ul>
+    <% @stores.each do |store| %>
+      <li><%= store.name %> <%= link_to "edit", edit_store_path(store.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
