@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
-  # get 'homes/show'
-
   root 'homes#show'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :items, only: [:index, :create, :show, :update, :destroy]
+
+  resources :stores, only: [:index, :create, :update, :destroy] do
+    resources :zones, only: [:create, :update, :destroy]
+  end
+  
 end
