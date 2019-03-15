@@ -1,4 +1,18 @@
+/* Coolors Exported Palette - coolors.co/0a0908-22333b-eae0d5-c6ac8f-5e503f */
+$pearl: rgba(234, 224, 213, 1);
+$tan: rgba(198, 172, 143, 1);
+$mocha: rgba(94, 80, 63, 1);
+$green: rgba(34, 51, 59, 1);
+$black: rgba(10, 9, 8, 1);
+
 body {
   font-family: Futura;
-  color: #555;
+  color: $green;
+  font-size: 1.2em;
+  background-color: $pearl;
+  padding: 0 3% 3% 3%;
+}
+
+.no-bullet-list {
+  list-style-type: none;
 }
