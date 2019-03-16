@@ -1,19 +1,34 @@
+<%= link_to "All items", items_path %>
+<h3>Change item name</h3>
 <%= form_for @item, url: { :action => "update_name"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br />
-
   <%= f.submit "Save" %>
 <% end %>
 <br />
-<% if @item.locations.any? %>
-  <% @item.locations.each do |location| %>
-    store: <%= location.store_id %> and aisle:
-    <%= location.zone_id %>
+
+<h3>Current locations</h3>
+<% if @location_details.any? %>
+  <ul>
+  <% @location_details.each do |location| %>
+    <li>at <%= location[:store] %>  in
+    <%= location[:aisle] %> aisle  <%= link_to "delete", locations_path(location), method: :delete %></li>
   <% end %>
+  </ul>
 <% end %>
-Edit location or, no edit, only delete  and new
 
 
-Add new location.
+<h3>Add new location</h3>
+<%= form_for @item, url: { :action => "update_location", method: :put}  do |f| %>
+  <%= f.hidden_field :id, :value => @item.id %>
+  <%= f.label "Store" %>
+  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, { include_blank: true }) %>
+  <br />
+
+  <%= f.label "Zone" %>
+  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, { include_blank: true }) %>
+  <%= f.submit "Save" %>
+
+<% end %>
