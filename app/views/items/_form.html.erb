@@ -1,0 +1,14 @@
+<%= form_for @item  do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br />
+
+  <%= f.label "Store" %>
+  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, { include_blank: true }) %>
+  <br />
+
+  <%= f.label "Zone" %>
+  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, { include_blank: true }) %>
+
+  <%= f.submit "Save" %>
+<% end %>

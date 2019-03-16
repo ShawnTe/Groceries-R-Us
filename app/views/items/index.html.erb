@@ -1,39 +1,23 @@
 <h1>all the items</h1>
 <h2>new item</h2>
-<%= form_for @item  do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br />
-
-  <%= f.label "Store" %>
-  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, { include_blank: true }) %>
-  <br />
-
-  <%= f.label "Zone" %>
-  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, { include_blank: true }) %>
-
-  <%= f.submit "Save" %>
-<% end %>
+<%= render 'form' %>
 
 <h1>Show all items</h1>
-<% if @items.any? %>
-  <ul>
-    <% @items.each do |item| %>
-      <li><%= item.name %>  <%= link_to "edit", edit_item_path %> <br />
-        <% if item.locations.any? %>
-          <% item.locations.each do |location| %>
-            store: <%= location.store_id %> and aisle:
-            <%= location.zone_id %>
-          <% end %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
 
-<br />
-<br />
-<br />
-<br />
-item_path(item.id)
-f.hidden_field :user_id, :value => "1"
+<div>
+  <% if @items.any? %>
+    <%= form_tag(update_to_get_path, method: :put) do |item_check| %>
+      <ul class="no-bullet-list">
+        <% for item in @items %>
+          <li>
+            <%= check_box_tag("check_box-#{item.id}", "", item.to_get ? true : false )  %>
+            <%= label_tag "check_box-#{item.id}", item.name, class: '' %>
+            <%= link_to "edit", edit_item_path(item.id) %> <br />
+          </li>
+        <% end %>
+      </ul>
+      <%= submit_tag "Save" %>
+    <% end %>
+  <% end %>
+</div>
+onchange: ‘this.form.submit();’

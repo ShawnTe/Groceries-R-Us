@@ -1,0 +1,19 @@
+<%= form_for @item, url: { :action => "update_name"}  do |f| %>
+  <%= f.hidden_field :id, :value => @item.id %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br />
+
+  <%= f.submit "Save" %>
+<% end %>
+<br />
+<% if @item.locations.any? %>
+  <% @item.locations.each do |location| %>
+    store: <%= location.store_id %> and aisle:
+    <%= location.zone_id %>
+  <% end %>
+<% end %>
+Edit location or, no edit, only delete  and new
+
+
+Add new location.
