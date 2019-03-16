@@ -1,23 +1,20 @@
-<h1>all the items</h1>
-<h2>new item</h2>
+<h2>New item</h2>
 <%= render 'form' %>
 
-<h1>Show all items</h1>
-
+<h2>Check the things you need</h2>
+<h5>Edit to add location</h5>
 <div>
   <% if @items.any? %>
-    <%= form_tag(update_to_get_path, method: :put) do |item_check| %>
-      <ul class="no-bullet-list">
+    <%= form_with url: update_to_get_path, method: :put do |item_check| %>
+      <ul id="to-get-list" class="no-bullet-list">
         <% for item in @items %>
-          <li>
-            <%= check_box_tag("check_box-#{item.id}", "", item.to_get ? true : false )  %>
+          <li id="item-<%= item.id %>">
+            <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
             <%= label_tag "check_box-#{item.id}", item.name, class: '' %>
             <%= link_to "edit", edit_item_path(item.id) %> <br />
           </li>
         <% end %>
       </ul>
-      <%= submit_tag "Save" %>
     <% end %>
   <% end %>
 </div>
-onchange: ‘this.form.submit();’
