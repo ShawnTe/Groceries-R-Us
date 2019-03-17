@@ -8,24 +8,20 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @locations = @item.locations
+
     @location_details = []
+
     @locations.each do |location|
-      # p location
       @location_details << {
         :id => location.id,
         :store => Store.find(location.store_id).name,
         :aisle => Zone.find(location.zone_id).aisle
       }
-      # @location_details
     end
-    # p @location_details
   end
 
   def create
-    # p "PARAMS"
-    # p params
-    @item = Item.new(item_params[:item])
-    @item.locations << Location.create(item_params[:location])
+    @item = Item.new(name: item_params[:name])
     if @item.save
       p "Woohoo! Item saved!"
     else
@@ -46,21 +42,23 @@ class ItemsController < ApplicationController
   end
 
   def update_location
-    item = Item.find(item_params[:item][:id])
-    # p item.locations
+    item = Item.find(update_params[:item][:id])
 
     item.locations << Location.create(
-      store_id: item_params[:location][:store_id],
-      zone_id: item_params[:location][:zone_id]
+      store_id: update_params[:location][:store_id],
+      zone_id: update_params[:location][:zone_id]
     )
 
-    # p item.locations
     redirect_to edit_item_path(item)
   end
 
   private
 
   def item_params
+    params.require(:item).permit(:name)
+  end
+
+  def update_params
     {
       item: params.require(:item).permit(:id),
       location: params.require(:location).permit(:zone_id, :store_id)
