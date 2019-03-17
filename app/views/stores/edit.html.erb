@@ -2,4 +2,19 @@
 
 <br />
 <br />
+
+<%= form_with model: @zone, url: [@store, @zone] do |f| %>
+  <%= f.hidden_field :store_id, :value => @store.id %>
+  <%= f.label :aisle %>
+  <%= f.text_field :aisle %>
+  <%= f.submit "Save" %>
+<% end %>
+
+<% if @zones.any? %>
+  <ul>
+    <% @zones.each do |zone| %>
+      <li><%= zone.aisle %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= link_to "delete", store_path, method: :delete %>

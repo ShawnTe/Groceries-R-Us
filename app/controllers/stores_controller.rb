@@ -1,25 +1,28 @@
 class StoresController < ApplicationController
   def index
     @store = Store.new
-    @stores = Store.all
-  end
+    if params[:store_id]
+      @zones = Store.find(params[:store_id].includes(:stores).zones)
+    else
+      @stores = Store.all
+    end
 
-  # def show
-  # end
+  end
 
   def edit
       @store = Store.find(params[:id])
+      @zone = Zone.new
+      @zones = @store.zones
   end
 
   def create
     @store = Store.new(store_params)
-
     if @store.save
       p "WooHoo store saved!"
     else
       p "Alert: STORE NOT SAVED"
     end
-    redirect_to stores_path
+    redirect_back(fallback_location: items_path)
   end
 
   def update
