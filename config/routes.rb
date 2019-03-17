@@ -17,4 +17,5 @@ Rails.application.routes.draw do
     resources :zones, only: [:create, :update, :destroy]
   end
 
+  resources :lists, only: [:index, :show]
 end

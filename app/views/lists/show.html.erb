@@ -1,0 +1,12 @@
+<% if !@items_for_list.empty? %>
+    <% @items_for_list.each do |key, array_of_items| %>
+      <ul class="no-bullet-list">
+        <%= key %>
+        <% array_of_items.each do |item| %>
+          <li>
+            <%= item.name %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+<% end %>

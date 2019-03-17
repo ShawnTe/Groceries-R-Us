@@ -1,0 +1,6 @@
+
+<% if @stores.any? %>
+  <% @stores.each do |store| %>
+    <%= link_to store.name, list_path(store) %><br />
+  <% end %>
+<% end %>
