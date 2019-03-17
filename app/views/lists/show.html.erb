@@ -3,7 +3,9 @@
       <ul class="no-bullet-list">
         <%= key %>
         <% array_of_items.each do |item| %>
-          <li>
+          <li id="item-<%= item.id %>">
+            <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
+
             <%= item.name %>
           </li>
         <% end %>
