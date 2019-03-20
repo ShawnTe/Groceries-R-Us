@@ -1,0 +1,14 @@
+<% if !@items_for_list.empty? %>
+    <% @items_for_list.each do |key, array_of_items| %>
+      <ul class="no-bullet-list">
+        <%= key %>
+        <% array_of_items.each do |item| %>
+          <li id="item-<%= item.id %>">
+            <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
+
+            <%= item.name %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+<% end %>

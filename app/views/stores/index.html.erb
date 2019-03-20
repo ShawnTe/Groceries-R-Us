@@ -1,9 +1,7 @@
-<h1>manage all the stores</h1>
-
 <h2>new store</h2>
 <%= render "form" %>
 
-<h1>all yer stores</h1>
+<h2>all yer stores</h2>
 <% if @stores.any? %>
   <ul>
     <% @stores.each do |store| %>

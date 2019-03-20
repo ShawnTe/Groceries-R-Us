@@ -1,8 +1,8 @@
-<%= link_to "All items", items_path %>
-<h3>Change item name</h3>
+<br />
+<br />
 <%= form_for @item, url: { :action => "update_name"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
-  <%= f.label :name %>
+  <%= f.label "Edit name" %>
   <%= f.text_field :name %>
   <br />
   <%= f.submit "Save" %>
@@ -19,16 +19,18 @@
   </ul>
 <% end %>
 
-
 <h3>Add new location</h3>
-<%= form_for @item, url: { :action => "update_location", method: :put}  do |f| %>
+
+<%= form_for @item, url: { :action => "update_location", method: :put }  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
   <%= f.label "Store" %>
-  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, { include_blank: true }) %>
+  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, {}) %>
   <br />
 
-  <%= f.label "Zone" %>
-  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, { include_blank: true }) %>
-  <%= f.submit "Save" %>
+  <%= f.label "Aisle" %>
+  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, {}) %>
 
+  <br />
+  <%= f.submit "Save" %>
 <% end %>
+<%= link_to "Edit stores or aisles", stores_path %>
