@@ -5,7 +5,14 @@
 <% if @stores.any? %>
   <ul>
     <% @stores.each do |store| %>
-      <li><%= store.name %> <%= link_to "edit", edit_store_path(store.id) %></li>
+      <li>
+      <%= link_to edit_store_path(store.id) do %>
+      <nav class="expand-row tan-bg center-text padding black-font large-font">
+        store.name
+      </nav>
+      <% end %>
+      </li>
+
     <% end %>
   </ul>
 <% end %>

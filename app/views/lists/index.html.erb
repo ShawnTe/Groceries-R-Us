@@ -1,6 +1,13 @@
-<br />
 <% if @stores.any? %>
-  <% @stores.each do |store| %>
-    <%= link_to store.name, list_path(store) %><br />
-  <% end %>
+  <ul class="no-bullet-list no-list-indent">
+    <% @stores.each do |store| %>
+      <li>
+      <%= link_to list_path(store.id) do %>
+      <nav class="expand-row tan-bg center-text padding black-font large-font margin-top">
+        <%= store.name %>
+      </nav>
+      <% end %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
