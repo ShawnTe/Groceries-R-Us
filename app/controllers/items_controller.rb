@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
   def index
     @item = Item.new
-    @items = Item.all
+    @items = Item.all.order(counter: :desc)
   end
 
   def edit
@@ -38,7 +38,8 @@ class ItemsController < ApplicationController
 
   def update_to_get
     item = Item.find(params[:format])
-    item.update(to_get: !item.to_get)
+    # item.counter += 1 if item.to_get == true
+    item.update_attributes(to_get: !item.to_get, counter: 6)
   end
 
   def update_location
