@@ -8,10 +8,12 @@ class ZonesController < ApplicationController
     else
       render stores_path
     end
-
-
   end
 
+  def destroy
+    p "IN DESTORY IN ZONES ********Left off here compelte destroy action"
+    p params
+  end
   private
 
   def zones_params

@@ -13,7 +13,7 @@
 <% if @zones.any? %>
   <ul>
     <% @zones.each do |zone| %>
-      <li><%= zone.aisle %></li>
+      <li><%= zone.aisle %> <%= link_to "delete", store_zone_path(zone.store_id, zone.id), method: :delete %></li>
     <% end %>
   </ul>
 <% end %>
