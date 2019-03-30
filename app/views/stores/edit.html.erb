@@ -21,7 +21,7 @@
       <% @zones.each do |zone| %>
         <li class="taller-line-item medium-font"><%= zone.aisle %>
           <%= link_to "edit", edit_store_zone_path(:store_id => zone.store_id, :id => zone.id), class: "small-font" %> |
-          <%= link_to "delete", store_zone_path(zone.store_id, zone.id), method: :delete, class: "small-font" %>
+          <%= link_to "delete", store_zone_path(:store_id => zone.store_id, :id => zone.id), method: :delete, class: "small-font" %>
         </li>
       <% end %>
     </ul>

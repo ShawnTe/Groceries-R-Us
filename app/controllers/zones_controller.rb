@@ -28,9 +28,20 @@ class ZonesController < ApplicationController
   end
 
   def destroy
-    p "IN DESTORY IN ZONES ********Left off here compelte destroy action"
-    p params
+    zone = Zone.find(params[:id])
+    store = Store.find(params[:store_id])
+    store.zones.delete(zone)
+
+    location = Location.where([
+      "zone_id = ? and store_id = ?",
+      "#{zone.id}",
+      "#{store.id}"
+      ])
+    if location.any?
+      location.destroy
+    end
   end
+
   private
 
   def zones_params
