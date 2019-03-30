@@ -36,10 +36,11 @@ class ZonesController < ApplicationController
       "zone_id = ? and store_id = ?",
       "#{zone.id}",
       "#{store.id}"
-      ])
+    ])
     if location.any?
       location.destroy
     end
+    redirect_to edit_store_path
   end
 
   private
