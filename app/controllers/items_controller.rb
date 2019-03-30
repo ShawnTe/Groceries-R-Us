@@ -32,8 +32,12 @@ class ItemsController < ApplicationController
 
   def update_name
     @item = Item.find(change_name_params[:id])
-    @item.update({name: change_name_params[:name]})
-    redirect_to items_path
+    if @item.update({name: change_name_params[:name]})
+      flash[:notice] = "Name changed."
+    else
+      flash[:alert] = "Name not changed."
+    end
+    redirect_to edit_item_path(@item.id)
   end
 
   def update_to_get

@@ -1,20 +1,29 @@
 <br />
-<br />
 <%= form_for @item, url: { :action => "update_name"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
   <%= f.label "Edit name" %>
   <%= f.text_field :name %>
-  <br />
-  <%= f.submit "Save" %>
+  <%= f.submit "Save name" %>
 <% end %>
-<br />
 
-<h3>Current locations</h3>
+<% if flash[:notice] %>
+  <div class="green-success-font small-font">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="red-fail-font small-font">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<h3>Locations</h3>
 <% if @location_details.any? %>
   <ul>
   <% @location_details.each do |location| %>
-    <li>at <%= location[:store] %>  in
-    <%= location[:aisle] %> aisle  <%= link_to "delete", locations_path(location), method: :delete %></li>
+    <li><%= location[:store] %>:
+    <%= location[:aisle] %> aisle <%= link_to "remove location", locations_path(location), method: :delete, class: "small-font" %></li>
   <% end %>
   </ul>
 <% end %>
@@ -30,7 +39,8 @@
   <%= f.label "Aisle" %>
   <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, {}) %>
 
-  <br />
-  <%= f.submit "Save" %>
+  <%= f.submit "Save location" %>
 <% end %>
-<%= link_to "Edit stores or aisles", stores_path %>
+<br />
+
+<%= link_to "edit/add stores and aisles", stores_path, class: "small-font" %>
