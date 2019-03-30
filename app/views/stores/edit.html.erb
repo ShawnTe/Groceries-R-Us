@@ -1,20 +1,28 @@
 <div id="edit-store-container">
   <%= render "form" %>
-
+  <% if flash[:notice] %>
   <br />
-  <br />
-
-  <%= form_with model: @zone, url: [@store, @zone] do |f| %>
-    <%= f.hidden_field :store_id, :value => @store.id %>
-    <%= f.label "Add new aisle" %>
-    <%= f.text_field :aisle %>
-    <%= f.submit "Save" %>
+    <div class="small-font green-success-font">
+      <%= flash[:notice] %>
+    </div>
   <% end %>
+  <% if flash[:alert] %>
+    <div class="small-font red-fail-font">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <br />
+  <h2><%= @store.name %>'s aisles</h2>
+
+  <%= render "stores/aisle_form" %>
 
   <% if @zones.any? %>
     <ul>
       <% @zones.each do |zone| %>
-        <li class="taller-line-item medium-font"><%= zone.aisle %> <%= link_to "delete", store_zone_path(zone.store_id, zone.id), method: :delete %></li>
+        <li class="taller-line-item medium-font"><%= zone.aisle %>
+          <%= link_to "edit", edit_store_zone_path(:store_id => zone.store_id, :id => zone.id), class: "small-font" %> |
+          <%= link_to "delete", store_zone_path(zone.store_id, zone.id), method: :delete, class: "small-font" %>
+        </li>
       <% end %>
     </ul>
   <% end %>

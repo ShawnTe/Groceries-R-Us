@@ -1,6 +1,6 @@
 <h3>Check the things you need</h3>
 <%= render 'form' %>
-<h5>(Edit to add location)</h5>
+<h5>(Edit to add store info)</h5>
 <div>
   <% if @items.any? %>
     <%= form_with url: update_to_get_path, method: :put do |item_check| %>
@@ -9,7 +9,7 @@
           <li id="item-<%= item.id %>">
             <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
             <%= label_tag "check_box-#{item.id}", item.name, class: '' %>
-            <%= link_to "edit", edit_item_path(item.id), class: "small-font" %> <%= link_to "delete", item_path(item.id), method: :delete, class: "small-font" %><br />
+            <%= link_to "edit", edit_item_path(item.id), class: "small-font" %> | <%= link_to "delete", item_path(item.id), method: :delete, class: "small-font" %><br />
           </li>
 
         <% end %>

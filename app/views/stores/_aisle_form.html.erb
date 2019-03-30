@@ -1,0 +1,6 @@
+<%= form_with model: @zone, url: [@store, @zone] do |f| %>
+  <%= f.hidden_field :store_id, :value => @store.id %>
+  <%= f.label "Aisle name" %>
+  <%= f.text_field :aisle %>
+  <%= f.submit "Save" %>
+<% end %>

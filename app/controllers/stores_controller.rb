@@ -30,11 +30,11 @@ class StoresController < ApplicationController
     @store.update(store_params)
 
     if @store.save
-      p "WooHoo store saved!"
+      flash[:notice] = "Store name saved."
     else
-      p "Alert: STORE NOT SAVED"
+      flash[:alert] = "Store name not saved."
     end
-    redirect_to stores_path
+    redirect_to edit_store_path(@store.id)
   end
 
   def destroy

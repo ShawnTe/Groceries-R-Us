@@ -36,6 +36,7 @@
   <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, {}) %>
   <br />
 
+<div class="red-fail-font">NEED TO FILTER BY STORE'S ZONES/AISLES</div>
   <%= f.label "Aisle" %>
   <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, {}) %>
 

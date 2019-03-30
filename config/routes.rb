@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 # put 'item:id', to: 'items#update_name'
 
   resources :stores, only: [:index, :edit, :create, :update, :destroy] do
-    resources :zones, only: [:create, :destroy]
+    resources :zones, only: [:create, :edit, :update, :destroy]
   end
 
   resources :lists, only: [:index, :show]
