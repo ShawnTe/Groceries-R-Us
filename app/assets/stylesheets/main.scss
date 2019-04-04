@@ -49,9 +49,9 @@ h1 {
 #store-container {
   display: grid;
   min-height: 100%;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 2em 2em auto;
-  grid-gap: 2%;
+  grid-template-columns: .8fr auto;
+  grid-template-rows: 3em 2em auto;
+  // grid-gap: 2%;
   align-items: start;
 }
 #store-container > h2, form{
@@ -172,4 +172,8 @@ a:active {
 .no-list-indent {
   list-style: none;
   padding-left: 0;
+}
+
+.margin-top {
+  margin-top: 5%;
 }
