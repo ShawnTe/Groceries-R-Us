@@ -2,8 +2,10 @@ class ZonesController < ApplicationController
 
   def create
     @zone = Zone.new(zones_params)
+    store = Store.find(zones_params[:store_id])
 
     if @zone.save
+      store.zones << @zone
       redirect_to edit_store_path(@zone.store_id)
     else
       render stores_path
@@ -40,7 +42,7 @@ class ZonesController < ApplicationController
     if location.any?
       location.destroy
     end
-    redirect_to edit_store_path
+    redirect_to edit_store_path store
   end
 
   private
