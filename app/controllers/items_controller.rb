@@ -7,6 +7,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+
     @locations = @item.locations
 
     @location_details = []
@@ -61,6 +62,20 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id])
     item.destroy
     redirect_to items_path
+  end
+
+  def get_drop_down_options
+    store = Store.find(params[:store_id])
+    @options = Zone.where(
+      "store_id = ?", store.id
+      ).collect {|z| [
+        z.aisle,
+        z.id,
+        { 'aisle_name' => z.aisle }
+      ] }
+
+    render json: { html: render_to_string(partial: 'edit', options: @options) }
+
   end
 
   private

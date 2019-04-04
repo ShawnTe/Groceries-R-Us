@@ -10,9 +10,14 @@ class StoresController < ApplicationController
   end
 
   def edit
-      @store = Store.find(params[:id])
-      @zone = Zone.new
-      @zones = @store.zones
+    p "IN STORES EDIT ACTION"
+    p "@store"
+      p @store = Store.find(params[:id])
+    p "@zone"
+    p  @zone = Zone.new
+    p "@zones"
+
+    p  @zones = @store.zones
   end
 
   def create

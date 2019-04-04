@@ -30,18 +30,17 @@
 
 <h3>Add new location</h3>
 
-<%= form_for @item, url: { :action => "update_location", method: :put }  do |f| %>
+<%= form_for @item, url: { :action => "update_location", method: :put }, :html => {:id => "store-drop-down"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
   <%= f.label "Store" %>
-  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, {}) %>
+  <%= select("location", "store_id", Store.all.collect {|s| [ s.name, s.id, {'store_name' => s.name } ] }, :include_blank => true) %>
   <br />
 
-<div class="red-fail-font">NEED TO FILTER BY STORE'S ZONES/AISLES</div>
-  <%= f.label "Aisle" %>
-  <%= select("location", "zone_id", Zone.all.collect {|z| [ z.aisle, z.id, { 'aisle_name' => z.aisle } ] }, {}) %>
+<div class="" id="zone-drop-down">
 
-  <%= f.submit "Save location" %>
+</div>
 <% end %>
+
 <br />
 
 <%= link_to "edit/add stores and aisles", stores_path, class: "small-font" %>

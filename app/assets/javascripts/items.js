@@ -1,11 +1,14 @@
-
-// put listener on list
-// catch onchange events
-// capture id, and value
-// send to items#update_to_get to change items value
-// send updated value and checked presence to form
-
 $(document).ready(function() {
 
-  console.log("We are SOOOOOO ready!")
+  $("#store-drop-down").change(function(e) {
+    var store_id = e.target.value;
+    var url = '/get_drop_down_options?store_id=' + store_id
+    Rails.ajax({
+      url: "/get_drop_down_options?store_id=" + store_id,
+      type: "get",
+      success: function(data) {
+        $('#zone-drop-down').html(data.html)
+      }
+    })
+  })
 });
