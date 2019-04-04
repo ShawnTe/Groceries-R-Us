@@ -4,7 +4,7 @@
 <div>
   <% if @items.any? %>
     <%= form_with url: update_to_get_path, method: :put do |item_check| %>
-      <ul id="to-get-list" class="no-bullet-list">
+      <ul id="to-get-list" class="no-bullet-list list no-list-indent">
         <% for item in @items %>
           <li id="item-<%= item.id %>">
             <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
