@@ -7,17 +7,22 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-
     @locations = @item.locations
-
     @location_details = []
 
     @locations.each do |location|
-      @location_details << {
-        :id => location.id,
-        :store => Store.find(location.store_id).name,
-        :aisle => Zone.find(location.zone_id).aisle
-      }
+      if !location.zone_id.blank?
+        @location_details << {
+          :id => location.id,
+          :store => Store.find(location.store_id).name,
+          :aisle => Zone.find(location.zone_id).aisle
+        }
+      else
+        @location_details << {
+          :id => location.id,
+          :store => Store.find(location.store_id).name,
+        }
+      end
     end
   end
 

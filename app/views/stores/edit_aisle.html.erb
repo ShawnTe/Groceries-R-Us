@@ -1,1 +1,6 @@
-<%= render "stores/aisle_form" %>
+<div class="add-section">
+  <h3 class="margin-top-none">Edit</h3>
+  <%= render "stores/aisle_form" %>
+</div>
+<br />
+<%= link_to image_tag("delete-trash-wine.svg", :alt => "delete icon", :height => 30), store_zone_path(:store_id => @zone.store_id, :id => @zone.id), method: :delete %>

@@ -1,21 +1,23 @@
 <div id="store-container">
-  <h2>New</h2>
-  <%= render "form" %>
   <div class="span-2">
-  <h2 class="span-cols">all yer stores</h2>
-  <% if @stores.any? %>
-    <ul class="no-bullet-list no-list-indent">
-      <% @stores.each do |store| %>
-        <li>
-        <%= link_to edit_store_path(store.id) do %>
-        <nav class="green-bg center-text pearl-font medium-font taller-line-item margin-bottom">
-          <%= store.name %>
-        </nav>
-        <% end %>
-        </li>
+    <h2 class="span-cols">all yer stores</h2>
+    <% if @stores.any? %>
+      <ul class="no-bullet-list no-list-indent">
+        <% @stores.each do |store| %>
+          <li>
+          <%= link_to edit_store_path(store.id) do %>
+          <nav class="green-bg center-text pearl-font medium-font taller-line-block margin-bottom">
+            <%= store.name %>
+          </nav>
+          <% end %>
+          </li>
 
-      <% end %>
-    </ul>
-  <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <h2>Add new</h2>
   <div>
+    <%= render "form" %>
+  </div>
 </div>

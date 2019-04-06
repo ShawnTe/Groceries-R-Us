@@ -1,5 +1,8 @@
 <div id="edit-store-container">
-  <%= render "form" %>
+  <div class="add-section">
+    <h3 class="margin-top-none">Add</h3>
+    <%= render "form" %>
+  </div>
   <% if flash[:notice] %>
   <br />
     <div class="small-font green-success-font">
@@ -11,20 +14,22 @@
       <%= flash[:alert] %>
     </div>
   <% end %>
-  <br />
   <h2><%= @store.name %>'s aisles</h2>
 
-  <%= render "stores/aisle_form" %>
 
   <% if @zones.any? %>
-    <ul>
+    <ul class="no-bullet-list">
       <% @zones.each do |zone| %>
-        <li class="taller-line-item medium-font"><%= zone.aisle %>
-          <%= link_to "edit", edit_store_zone_path(:store_id => zone.store_id, :id => zone.id), class: "small-font" %> |
-          <%= link_to "delete", store_zone_path(:store_id => zone.store_id, :id => zone.id), method: :delete, class: "small-font" %>
+        <li class="medium-font"><%= zone.aisle %>
+          <%= link_to image_tag("edit-wine.svg", :alt => "edit icon", :height => 20), edit_store_zone_path(:store_id => zone.store_id, :id => zone.id), class: "small-font" %>
         </li>
       <% end %>
     </ul>
   <% end %>
-  <%= link_to "delete store", store_path, method: :delete %>
+  <div class="add-section">
+    <h3 class="margin-top-none">Add</h3>
+    <%= render "stores/aisle_form" %>
+  </div>
+  <br />
+  <%= link_to image_tag("delete-trash-wine.svg", :alt => "delete icon", :height => 30), store_path, method: :delete %>
 </div>

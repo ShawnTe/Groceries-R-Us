@@ -1,10 +1,11 @@
-<br />
+<div class="add-section">
 <%= form_for @item, url: { :action => "update_name"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
   <%= f.label "Edit name" %>
   <%= f.text_field :name %>
-  <%= f.submit "Save name" %>
+  <%= f.submit "Save" %>
 <% end %>
+</div>
 
 <% if flash[:notice] %>
   <div class="green-success-font small-font">
@@ -20,15 +21,21 @@
 
 <h3>Locations</h3>
 <% if @location_details.any? %>
-  <ul>
+  <ul class="no-bullet-list list no-list-indent">
   <% @location_details.each do |location| %>
-    <li><%= location[:store] %>:
-    <%= location[:aisle] %> aisle <%= link_to "remove location", locations_path(location), method: :delete, class: "small-font" %></li>
+    <li><span class="small-font"><%= location[:store] %></span>
+        <span class="medium-font"><%= location[:aisle] %></span>
+        <% if !location[:aisle].blank? %>
+          <span class="small-font"> aisle&nbsp;</span>
+        <% end %>
+        <%= link_to image_tag("delete-trash-wine.svg", :alt => "delete icon", :height => 20), locations_path(location), method: :delete, class: "small-font" %></li>
   <% end %>
   </ul>
+<% else %>
+<span class="mocha-font small-font">No locations for <%= @item.name %></span>
 <% end %>
 
-<h3>Add new location</h3>
+<h3>Add location</h3>
 
 <%= form_for @item, url: { :action => "update_location", method: :put }, :html => {:id => "store-drop-down"}  do |f| %>
   <%= f.hidden_field :id, :value => @item.id %>
@@ -43,5 +50,8 @@
 
 <br />
 <div class="margin-top">
-  <%= link_to "Click to edit your stores and aisles", stores_path, class: "small-font" %>
+  <%= link_to "Edit your stores and aisles", stores_path, class: "small-font btn" %>
 </div>
+<br />
+<br />
+<%= link_to image_tag("delete-trash-wine.svg", :alt => "delete item icon", :height => 30), item_path(@item.id), method: :delete %>
