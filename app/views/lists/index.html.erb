@@ -1,6 +1,18 @@
-<br />
-<% if @stores.any? %>
-  <% @stores.each do |store| %>
-    <%= link_to store.name, list_path(store) %><br />
+<div id="list-container">
+  <% if @stores.any? %>
+    <ul class="no-bullet-list no-list-indent">
+      <% @stores.each do |store| %>
+        <li>
+        <%= link_to list_path(store.id) do %>
+        <nav class="tan-bg center-text padding black-font large-font margin-bottom">
+          <%= store.name %>
+        </nav>
+        <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h1>No stores set up yet.
+    Set them up <%= link_to "here", stores_path %>.</h1>
   <% end %>
-<% end %>
+</div>

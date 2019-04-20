@@ -2,21 +2,52 @@ class ZonesController < ApplicationController
 
   def create
     @zone = Zone.new(zones_params)
+    store = Store.find(zones_params[:store_id])
 
     if @zone.save
+      store.zones << @zone
       redirect_to edit_store_path(@zone.store_id)
     else
       render stores_path
     end
   end
 
-  def destroy
-    p "IN DESTORY IN ZONES ********Left off here compelte destroy action"
-    p params
+  def edit
+    @zone = Zone.find(params[:id])
+    @store = Store.find(params[:store_id])
+    render "stores/edit_aisle"
   end
+
+  def update
+    @zone = Zone.find(params[:id])
+    @zone.update(zones_params)
+    if @zone.save
+      flash[:notice] = "Aisle updated."
+    else
+      flash[:alert] = "Aisle not updated."
+    end
+    redirect_to edit_store_path(@zone.store_id)
+  end
+
+  def destroy
+    zone = Zone.find(params[:id])
+    store = Store.find(params[:store_id])
+    store.zones.delete(zone)
+
+    location = Location.where([
+      "zone_id = ? and store_id = ?",
+      "#{zone.id}",
+      "#{store.id}"
+    ])
+    if location.any?
+      location.destroy
+    end
+    redirect_to edit_store_path store
+  end
+
   private
 
   def zones_params
-    params.require(:zone).permit(:store_id, :aisle)
+    params.require(:zone).permit(:store_id, :aisle, :zone_id)
   end
 end

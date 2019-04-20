@@ -8,15 +8,21 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @locations = @item.locations
-
     @location_details = []
 
     @locations.each do |location|
-      @location_details << {
-        :id => location.id,
-        :store => Store.find(location.store_id).name,
-        :aisle => Zone.find(location.zone_id).aisle
-      }
+      if !location.zone_id.blank?
+        @location_details << {
+          :id => location.id,
+          :store => Store.find(location.store_id).name,
+          :aisle => Zone.find(location.zone_id).aisle
+        }
+      else
+        @location_details << {
+          :id => location.id,
+          :store => Store.find(location.store_id).name,
+        }
+      end
     end
   end
 
@@ -32,8 +38,12 @@ class ItemsController < ApplicationController
 
   def update_name
     @item = Item.find(change_name_params[:id])
-    @item.update({name: change_name_params[:name]})
-    redirect_to items_path
+    if @item.update({name: change_name_params[:name]})
+      flash[:notice] = "Name changed."
+    else
+      flash[:alert] = "Name not changed."
+    end
+    redirect_to edit_item_path(@item.id)
   end
 
   def update_to_get
@@ -51,6 +61,26 @@ class ItemsController < ApplicationController
     )
 
     redirect_to edit_item_path(item)
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to items_path
+  end
+
+  def get_drop_down_options
+    store = Store.find(params[:store_id])
+    @options = Zone.where(
+      "store_id = ?", store.id
+      ).collect {|z| [
+        z.aisle,
+        z.id,
+        { 'aisle_name' => z.aisle }
+      ] }
+
+    render json: { html: render_to_string(partial: 'edit', options: @options) }
+
   end
 
   private

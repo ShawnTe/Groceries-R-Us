@@ -1,0 +1,7 @@
+<% if item.stores.any? %>
+  <span class="small-font tan-font">
+    <% item.stores.each do |store| %>
+      <%= store.name %>&nbsp 
+    <% end %>
+  </span>
+<% end %>

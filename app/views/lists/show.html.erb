@@ -1,14 +1,16 @@
-<% if !@items_for_list.empty? %>
-    <% @items_for_list.each do |key, array_of_items| %>
-      <ul class="no-bullet-list">
-        <%= key %>
-        <% array_of_items.each do |item| %>
-          <li id="item-<%= item.id %>">
-            <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
+<div id="goto-store-container">
+  <% if !@items_for_list.empty? %>
+      <% @items_for_list.each do |key, array_of_items| %>
+        <ul class="no-bullet-list no-list-indent">
+          <h2><%= key %></h2>
+          <% array_of_items.each do |item| %>
+            <li id="item-<%= item.id %>" class="black-font medium-font">
+              <%= check_box_tag dom_id(item, :checkbox), "", item.to_get ? true : false, data: {url: update_to_get_path(item), method: :put, remote: true }  %>
 
-            <%= item.name %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-<% end %>
+              <%= item.name %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+  <% end %>
+</div>

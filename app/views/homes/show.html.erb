@@ -1,5 +1,16 @@
-<h1>Woot!</h1>
-
-<%= link_to "Go to the store!", lists_path %>
-<br />
-<%= link_to "Manage items", items_path %>
+ <div id="home-container">
+  <div class="mocha-bg padding-10">
+    <%= link_to lists_path do %>
+      <nav class="center-text pearl-font medium-font">
+        Go to the store
+      </nav>
+    <% end %>
+  </div>
+  <div class="tan-bg padding-10">
+    <%= link_to items_path do %>
+      <nav class="center-text black-font medium-font">
+        Select yer items
+      </nav>
+    <% end %>
+  </div>
+</div>

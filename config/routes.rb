@@ -11,11 +11,12 @@ Rails.application.routes.draw do
   put 'update_to_get', to: "items#update_to_get", as: :update_to_get
 
   resource :locations, only: [:destroy]
-# put 'item:id', to: 'items#update_name'
 
   resources :stores, only: [:index, :edit, :create, :update, :destroy] do
-    resources :zones, only: [:create, :destroy]
+    resources :zones, only: [:create, :edit, :update, :destroy]
   end
+
+  get 'get_drop_down_options', to: "items#get_drop_down_options"
 
   resources :lists, only: [:index, :show]
 end
