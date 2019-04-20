@@ -1,9 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Things on the ToDo list:
+* add testing e2e, prob cypress
+* add authentication/users
+* add testing (doh!) unit
+* search feature on Items page
+* PWA-ify to make adding items easier (i.e. can check items when offline), or
+* Add a text-to-add feature
+* styling
+* add security certificate
 
-Things you may want to cover:
+
+Things that I may cover in this doc:
 
 * Ruby version
 
