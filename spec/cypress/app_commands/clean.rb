@@ -1,3 +1,5 @@
+require 'database_cleaner'
+
 if defined?(DatabaseCleaner)
   # cleaning the database using database_cleaner
   DatabaseCleaner.strategy = :truncation
