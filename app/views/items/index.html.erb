@@ -1,11 +1,11 @@
 <br />
 <div class="add-section">
-  <h3 class="margin-top-none">Item</h3>
+  <h1 class="margin-top-none">Item</h1>
   <%= render 'form' %>
 </div>
-<h3 class="margin-bottom-1">Check what you need</h3>
 <div>
   <% if @items.any? %>
+    <h3 class="margin-bottom-1">Check what you need</h3>
     <%= form_with url: update_to_get_path, method: :put do |item_check| %>
       <ul id="to-get-list" class="no-bullet-list list no-list-indent">
         <% for item in @items %>
@@ -17,9 +17,10 @@
 
             <%= link_to image_tag("edit-wine.svg", :alt => 'edit icon', :height => 20), edit_item_path(item.id) %>
           </li>
-
         <% end %>
       </ul>
     <% end %>
+  <% else %>
+    <h3 id="no-items-msg">Your items will show here.</h3>
   <% end %>
 </div>
